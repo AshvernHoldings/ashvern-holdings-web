@@ -3,7 +3,7 @@ import ContactForm from "./contact-form";
 import cityHero from "../public/img/city-hero.webp";
 import towerFacade from "../public/img/tower-facade.webp";
 
-const CONTACT_EMAIL = "tbell@ashvernholdings.com";
+const IR_EMAIL = "investing@ashvernholdings.com";
 
 export default function Home() {
   return (
@@ -99,7 +99,7 @@ export default function Home() {
           </p>
           <p>
             Investors who wish to reach the company may write to{" "}
-            <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>. Correspondence
+            <a href={`mailto:${IR_EMAIL}`}>{IR_EMAIL}</a>. Correspondence
             is read and answered directly.
           </p>
         </div>
