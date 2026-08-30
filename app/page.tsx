@@ -1,7 +1,7 @@
 import Image from "next/image";
 import ContactForm from "./contact-form";
-import ledgerHero from "../public/img/ledger-hero.webp";
-import filedPaper from "../public/img/filed-paper.webp";
+import cityHero from "../public/img/city-hero.webp";
+import towerFacade from "../public/img/tower-facade.webp";
 
 const CONTACT_EMAIL = "tbell@ashvernholdings.com";
 
@@ -20,8 +20,8 @@ export default function Home() {
         </p>
         <figure className="plate measure">
           <Image
-            src={ledgerHero}
-            alt="A page from a handwritten accounting ledger, entries in fountain-pen cursive"
+            src={cityHero}
+            alt="A city skyline at dusk, lit towers reflected in calm water"
             sizes="(max-width: 44rem) 100vw, 40rem"
             placeholder="blur"
             priority
@@ -58,8 +58,8 @@ export default function Home() {
           </p>
           <figure className="plate plate--quiet">
             <Image
-              src={filedPaper}
-              alt="Close-up of aged, lightly foxed paper"
+              src={towerFacade}
+              alt="Close-up of a glass-and-steel office tower facade"
               sizes="(max-width: 44rem) 100vw, 40rem"
               placeholder="blur"
             />
