@@ -1,0 +1,381 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ *
+ * Ashvern Holdings — "Ledger"
+ * Editorial / charter aesthetic. Ink on warm paper, one bronze accent.
+ * ------------------------------------------------------------------ */
+
+:root {
+  --paper: #fafaf7;
+  --card: #ffffff;
+  --ink: #1c1c1a;
+  --ink-soft: #33322d;
+  --muted: #5b564c;
+  --line: #e4e0d8;
+  --line-strong: #d3cdbf;
+  --bronze: #7a5f30;
+  --error: #a33a28;
+
+  --measure: 40rem;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+
+  --font-serif: var(--font-eb-garamond), "EB Garamond", Georgia, serif;
+  --font-sans: var(--font-lato), "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-bronze: var(--bronze);
+  --font-serif: var(--font-serif);
+  --font-sans: var(--font-sans);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+a {
+  color: var(--bronze);
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 100% 1px;
+  transition: background-size 150ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  a:hover {
+    background-size: 0% 1px;
+  }
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--bronze);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+/* ---- layout -------------------------------------------------------- */
+
+.shell {
+  max-width: calc(var(--measure) + 3.5rem);
+  margin-inline: auto;
+  padding-inline: 1.75rem;
+}
+
+.section {
+  padding-block: clamp(3.5rem, 9vw, 6rem);
+  border-top: 1px solid var(--line);
+}
+
+.section:first-of-type {
+  border-top: 0;
+}
+
+.measure {
+  max-width: var(--measure);
+}
+
+/* ---- typography -------------------------------------------------- */
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+  margin: 0;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: clamp(2.4rem, 6vw, 3.5rem);
+  line-height: 1.08;
+}
+
+h2 {
+  font-size: clamp(1.6rem, 3.5vw, 2.05rem);
+  line-height: 1.2;
+}
+
+h3 {
+  font-size: 1.2rem;
+  line-height: 1.35;
+}
+
+p {
+  margin: 0 0 1.1em;
+  color: var(--ink-soft);
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 1.4rem;
+}
+
+.lede {
+  font-family: var(--font-serif);
+  font-size: clamp(1.2rem, 2.4vw, 1.45rem);
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+blockquote {
+  margin: 1.75rem 0;
+  padding-left: 1.4rem;
+  border-left: 2px solid var(--bronze);
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+blockquote p {
+  color: inherit;
+}
+
+.cite {
+  display: block;
+  margin-top: 0.7rem;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+/* ---- plates: licensed archival imagery, muted to the Ledger palette --- *
+ * Two images only (hero + Purpose). Photos are Pexels-licensed (free for
+ * commercial use, no attribution required, modification permitted):
+ *   hero    -- pexels.com/photo/cursive-handwriting-on-paper-5337733 (Magda Ehlers)
+ *   purpose -- pexels.com/photo/yellow-plain-surface-16557322 (Lumber Film)
+ * A real photo can't be generated to an exact hex, so each is desaturated /
+ * lifted (in sharp, then again here) and given a low-opacity bronze multiply
+ * pass so it sits inside ink #1c1c1a / paper #fafaf7 / bronze #7a5f30.        */
+
+figure.plate {
+  position: relative;
+  margin: 2.6rem 0 0;
+  border: 1px solid var(--line-strong);
+  background: var(--paper);
+  overflow: hidden;
+  line-height: 0;
+}
+
+figure.plate img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: saturate(0.7) contrast(0.95) brightness(1.02) sepia(0.06);
+}
+
+figure.plate::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--bronze);
+  mix-blend-mode: multiply;
+  opacity: 0.06;
+  pointer-events: none;
+}
+
+figure.plate--quiet {
+  margin-top: 2rem;
+}
+
+figure.plate--quiet img {
+  filter: saturate(0.75) contrast(0.98) brightness(1) sepia(0.05);
+}
+
+figure.plate--quiet::after {
+  opacity: 0.04;
+}
+
+/* ---- subsidiary entry ------------------------------------------- */
+
+.entry {
+  border: 1px solid var(--line);
+  background: var(--card);
+  padding: 1.6rem 1.75rem;
+}
+
+.entry-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 0.9rem;
+  margin-bottom: 0.8rem;
+}
+
+.status {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border: 1px solid var(--line-strong);
+  padding: 0.2rem 0.5rem;
+}
+
+/* ---- form ------------------------------------------------------- */
+
+.field {
+  display: block;
+  margin-bottom: 1.4rem;
+}
+
+.field span {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  margin-bottom: 0.4rem;
+}
+
+.field span em {
+  font-style: normal;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+input,
+textarea {
+  width: 100%;
+  font: inherit;
+  color: var(--ink);
+  background: var(--card);
+  border: 1px solid var(--line-strong);
+  border-radius: 0;
+  padding: 0.7rem 0.85rem;
+}
+
+textarea {
+  min-height: 8rem;
+  resize: vertical;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #9a948a;
+}
+
+.honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+button.submit {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--paper);
+  background: var(--ink);
+  border: 1px solid var(--ink);
+  padding: 0.75rem 1.6rem;
+  cursor: pointer;
+  transition: transform 120ms var(--ease-out), opacity 120ms var(--ease-out);
+}
+
+button.submit:active {
+  transform: scale(0.97);
+}
+
+button.submit:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.form-note {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+}
+
+.form-note.err {
+  color: var(--error);
+}
+
+/* ---- footer --------------------------------------------------- */
+
+footer {
+  border-top: 1px solid var(--line);
+  padding-block: 2.5rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+footer p {
+  margin: 0 0 0.3rem;
+  color: var(--muted);
+}
+
+footer .name {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  color: var(--ink);
+  margin-bottom: 0.6rem;
+}
+
+/* ---- motion: scroll reveal (CSS-only, progressive) ------------- */
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 42%;
+    }
+  }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
