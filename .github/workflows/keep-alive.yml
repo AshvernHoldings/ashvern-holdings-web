@@ -1,0 +1,26 @@
+name: keep-alive
+
+# Calls the /api/keep-alive route so the free-tier Supabase project keeps getting
+# activity and doesn't pause after 7 days. Twice a week is well under that.
+# Not using Netlify Scheduled Functions — free-tier availability wasn't confirmed.
+#
+# Setup: add a repository variable KEEP_ALIVE_URL pointing at the deployed route,
+# e.g. https://ashvernholdings.com/api/keep-alive
+# (Settings -> Secrets and variables -> Actions -> Variables).
+
+on:
+  schedule:
+    - cron: "17 8 * * 1,4" # Mon & Thu 08:17 UTC
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call keep-alive route
+        run: |
+          if [ -z "${{ vars.KEEP_ALIVE_URL }}" ]; then
+            echo "KEEP_ALIVE_URL repository variable is not set." >&2
+            exit 1
+          fi
+          curl --fail --location --show-error --silent "${{ vars.KEEP_ALIVE_URL }}"

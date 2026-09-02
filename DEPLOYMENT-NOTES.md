@@ -2,8 +2,41 @@
 
 Where hosting for `ashvern-holdings-web` stands, why, and what to do next.
 
-**Status (2026-08-30):** not deployed. Vercel was attempted and abandoned;
-the plan is now Netlify. See below.
+**Status (2026-09-02):** deployed to Netlify. Live at
+<https://endearing-conkies-cc79c4.netlify.app>. Custom domain
+(`ashvernholdings.com`) DNS is in progress. Vercel was attempted first and
+abandoned — history kept below.
+
+---
+
+## Deployed to Netlify (2026-09-02)
+
+- **Live URL:** <https://endearing-conkies-cc79c4.netlify.app>
+  (Netlify site id `995bb498-cd1b-4bfa-9113-b3ab922749f9`).
+- Deployed from `github.com/AshvernHoldings/ashvern-holdings-web` on a
+  **separate Netlify account**, matching the Supabase isolation pattern.
+- Env vars (`SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `RESEND_API_KEY`,
+  `CONTACT_NOTIFY_TO`, `CONTACT_NOTIFY_FROM`) set in Netlify's site environment
+  settings.
+- **Contact form tested end to end** on the live deployment: submission stored
+  in Supabase and notification email delivered.
+- **Custom domain:** `ashvernholdings.com` DNS records are being added to point
+  at Netlify.
+
+### Not yet public — access is gated
+
+As of 2026-09-02 the site sits behind **Netlify access control**: every path,
+including `/api/*`, returns `401` and the `app.netlify.com/edge-access` login
+redirect to anyone without a Netlify session. This is fine for review but means:
+
+- the site is not reachable by the public or by search engines yet;
+- **the keep-alive cron (`.github/workflows/keep-alive.yml`) cannot reach
+  `/api/keep-alive`** until this is lifted. Remove the site access
+  restriction (or allow `/api/keep-alive` specifically) before relying on the
+  workflow, then set the `KEEP_ALIVE_URL` repo variable and run it once.
+
+See `LAUNCH-BLOCKERS.md` for the Resend-domain work still outstanding before
+public launch.
 
 ---
 
@@ -53,19 +86,19 @@ Ridgepoint project.
 
 ---
 
-## Next session — pick up here
+## Still to do
 
 1. **Confirm the Vercel cleanup landed.** Check that support has removed the
    `AshvernHoldings` Vercel team and waived the accidental Pro invoice, with
    no lingering charge or team membership.
-2. **Create a new, separate Netlify account** for Ashvern (not tied to any
-   Ridgepoint Netlify/Vercel login).
-3. **Deploy `ashvern-holdings-web` on Netlify** from
-   `github.com/AshvernHoldings/ashvern-holdings-web`, and connect the
-   `ashvernholdings.com` domain to **Netlify**, not Vercel.
+2. **Finish the `ashvernholdings.com` DNS cutover** to Netlify and confirm the
+   custom domain + TLS resolve.
+3. **Lift Netlify access control** so the site (and `/api/keep-alive`) is
+   publicly reachable, then set the `KEEP_ALIVE_URL` GitHub Actions repo
+   variable to `https://<public-host>/api/keep-alive` and trigger the
+   `keep-alive` workflow once to verify.
+4. **Clear the Resend-domain launch blocker** — see `LAUNCH-BLOCKERS.md`.
 
-When deploying, the environment variables currently only in `.env.local`
-(`SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `RESEND_API_KEY`,
-`CONTACT_NOTIFY_TO`, `CONTACT_NOTIFY_FROM`) must be set in Netlify's site
-environment settings — see `LAUNCH-BLOCKERS.md`, which also lists the
-Resend-domain work that must be done before the site is public.
+Netlify env vars (`SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `RESEND_API_KEY`,
+`CONTACT_NOTIFY_TO`, `CONTACT_NOTIFY_FROM`) are already set in the site's
+environment settings.
