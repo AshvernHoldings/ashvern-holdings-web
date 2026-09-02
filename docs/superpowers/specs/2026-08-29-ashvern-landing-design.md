@@ -71,6 +71,20 @@ Editorial / legal aesthetic; deliberately not Ridgepoint's navy.
   `CONTACT_NOTIFY_FROM=onboarding@resend.dev` (swap to a verified
   `@ashvernholdings.com` sender before public launch).
 
+### Free-tier keep-alive (added 2026-09-02)
+
+Supabase pauses a free-tier project after 7 days of inactivity.
+
+- `app/api/keep-alive/route.ts`: `GET` handler, HEAD count on
+  `contact_submissions` (`count: "exact", head: true`) via the service_role
+  key. Returns `{ ok, count, at }`. No caching config — a `GET` Route Handler
+  that queries the DB is dynamic by default.
+- `.github/workflows/keep-alive.yml`: scheduled `curl` of that route Mon & Thu
+  08:17 UTC, plus `workflow_dispatch`. GitHub Actions rather than Netlify
+  Scheduled Functions (free-tier availability unconfirmed); the repo is public
+  so Actions minutes are unlimited. Reads a `KEEP_ALIVE_URL` repository
+  variable pointing at the deployed route.
+
 ## Dependencies
 
 `next`, `react`, `react-dom`, `tailwindcss`, `@supabase/supabase-js`, `resend`.
@@ -84,6 +98,8 @@ Nothing else.
 4. Confirm Resend reports the email sent, and read the received email.
 5. Confirm Investor Relations copy reads as neutral/informational.
 6. Screenshots at 375px and 1280px.
+7. `curl` the deployed `/api/keep-alive` and confirm `{ ok: true }`; run the
+   `keep-alive` workflow once via `workflow_dispatch` and confirm it passes.
 
 ## Copy stance
 

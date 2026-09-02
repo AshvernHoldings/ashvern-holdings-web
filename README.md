@@ -17,8 +17,12 @@ submissions in Supabase and sends an email notification via Resend.
   created (see `supabase/schema.sql`).
 - Contact form verified end to end: submission stored in Supabase **and**
   notification email delivered (`last_event: delivered` via Resend).
-- Runs in development only. Env vars live in `.env.local`, which is git-ignored
-  and already populated on this machine.
+- **Deployed to Netlify** at <https://endearing-conkies-cc79c4.netlify.app>
+  (env vars set in the Netlify site settings). Currently behind Netlify access
+  control — returns `401` to anonymous requests — and the `ashvernholdings.com`
+  DNS cutover is in progress. See [`DEPLOYMENT-NOTES.md`](./DEPLOYMENT-NOTES.md).
+- Local dev still uses `.env.local`, which is git-ignored and already populated
+  on this machine.
 
 ## Run it
 
@@ -54,6 +58,21 @@ To stop a stray dev server on Windows: `taskkill /F /IM node.exe`.
 
 Read submissions in the Supabase table editor.
 
+## Keeping Supabase awake
+
+Supabase pauses a free-tier project after 7 days with no activity.
+`app/api/keep-alive/route.ts` runs a HEAD count on `contact_submissions` (no
+rows transferred) so any hit counts as activity.
+`.github/workflows/keep-alive.yml` calls that route Mon & Thu via `curl` (plus
+manual `workflow_dispatch`) — GitHub Actions, not Netlify Scheduled Functions,
+whose free-tier availability wasn't confirmed. This repo is public, so Actions
+minutes are unlimited.
+
+Set the `KEEP_ALIVE_URL` GitHub Actions **repository variable** to the deployed
+route (e.g. `https://<host>/api/keep-alive`) for the workflow to work. It fails
+while the site is behind Netlify access control — lift that, or exempt
+`/api/keep-alive`, first.
+
 ## Layout of the code
 
 | Path | What |
@@ -61,6 +80,8 @@ Read submissions in the Supabase table editor.
 | `app/page.tsx` | The page — all six sections (server component) |
 | `app/contact-form.tsx` | Contact form (client component) |
 | `app/api/contact/route.ts` | Validation + Supabase insert + Resend email |
+| `app/api/keep-alive/route.ts` | HEAD count on `contact_submissions` — free-tier keep-alive |
+| `.github/workflows/keep-alive.yml` | Scheduled `curl` of the keep-alive route (Mon & Thu) |
 | `app/globals.css` | "Ledger" design system: tokens, type, motion |
 | `app/layout.tsx` | Fonts (next/font) and metadata |
 | `supabase/schema.sql` | `contact_submissions` table + RLS |
@@ -70,5 +91,6 @@ Read submissions in the Supabase table editor.
 
 See [`LAUNCH-BLOCKERS.md`](./LAUNCH-BLOCKERS.md) — every item there must be
 cleared. In short: verify a domain in Resend and move `CONTACT_NOTIFY_TO` back to
-`tbell@ashvernholdings.com`, move env vars into the host, point a real domain at
-the deployment.
+`tbell@ashvernholdings.com`. Netlify env vars are already set; remaining
+deployment steps (DNS cutover, lifting access control) are in
+[`DEPLOYMENT-NOTES.md`](./DEPLOYMENT-NOTES.md).
