@@ -1,6 +1,10 @@
 # Bold Signature — Build Status
 
-Branch: `redesign/bold-signature` (off `master`, not merged).
+**Merged to `master` and live in production as of 2026-09-04.** Built on
+`redesign/bold-signature` (off `master`), PR #2, merge commit `7c29f1f`;
+the branch was deleted after merge (fully merged, safe). PR #1 ("Atrium,"
+the previous redesign attempt) was closed unmerged the same day.
+
 Spec: `docs/superpowers/specs/2026-09-04-ashvern-landing-redesign-bold.md`
 Plan: `docs/superpowers/plans/2026-09-04-ashvern-bold-signature.md`
 
@@ -107,23 +111,38 @@ with a new photo sourced the same careful way:
   changed in this pass, so the responsive behavior verified earlier by
   code inspection still applies unchanged.
 
-## Open items for review
+## Open items — still unresolved after merge
 
-- Mobile visual check (see #4 above) — the design should hold up fine per
-  the CSS, but hasn't been eyeballed on a real narrow viewport this
-  session.
-- Resend delivery to `tbell@ashvernholdingsllc.com` — spot-check that
-  inbox for the test-submission notification (subject will reference
-  "Bold Signature Verification").
-- Deploy-preview URL — to be filled in after pushing (see below).
+- Mobile visual check — never actually screenshotted across either build
+  pass (the browser tool's `resize_window` reported success but the
+  screenshot stayed at the desktop viewport both times, in two separate
+  sessions). Verified instead by reading the CSS (`clamp()` sizing, the
+  `52rem` nav breakpoint), which didn't change between passes. Worth an
+  actual phone check.
+- Resend delivery to `tbell@ashvernholdingsllc.com` for this redesign's
+  test submission was never independently confirmed — only that
+  `/api/contact` returned `200` with no logged error. Spot-check that
+  inbox if you want certainty (subject will reference "Bold Signature
+  Verification"). Separately, `README.md` records an earlier, fully
+  confirmed Resend delivery (`last_event: delivered`) from testing done
+  before this redesign — the notification pipeline itself is known-good,
+  just not re-confirmed end-to-end this time.
+- `city-hero.webp` (one of the two original licensed photos) is unused in
+  this design — left in the repo, unreferenced.
 
-## Deploy preview
+## Merge and production status
 
-Pushed to `origin/redesign/bold-signature`, PR #2:
-<https://github.com/AshvernHoldings/ashvern-holdings-web/pull/2>
-
-Netlify deploy preview (confirmed live, `200`, correct content via
-`curl`):
-<https://deploy-preview-2--endearing-conkies-cc79c4.netlify.app>
-
-Not merged to `master`.
+- PR #2: <https://github.com/AshvernHoldings/ashvern-holdings-web/pull/2>
+  — **merged** to `master` (merge commit `7c29f1f`, 2026-09-04).
+- Netlify deploy preview (used for pre-merge review, no longer relevant
+  now the branch is deleted):
+  <https://deploy-preview-2--endearing-conkies-cc79c4.netlify.app>
+- **Production confirmed serving this build**: both
+  <https://endearing-conkies-cc79c4.netlify.app> and the custom domain
+  <https://ashvernholdings.com> return `200` and serve the new hero image
+  (`skyline-hero.*.jpg`) — checked via the actual served HTML with
+  `curl`, not just Netlify's commit-status API, which stayed `pending`
+  long after the site had already updated (don't trust that API alone to
+  confirm a production deploy went out).
+- PR #1 ("Atrium") closed unmerged, with a comment pointing to PR #2 as
+  what shipped instead.

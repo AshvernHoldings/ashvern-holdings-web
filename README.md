@@ -6,9 +6,12 @@
 > goes live.
 
 Single-page corporate presence for Ashvern Holdings, Inc. Next.js 16 (App
-Router), Tailwind v4, EB Garamond / Lato. Six sections: Hero, Purpose,
-Subsidiaries, Investor Relations, Contact, Footer. The contact form stores
-submissions in Supabase and sends an email notification via Resend.
+Router), Tailwind v4. Current visual identity is "Bold Signature": a
+full-bleed photographic hero (Archivo display type overlaid on the image)
+and a recurring amber "seal arc" brand shape, Inter for body/UI. Six
+sections: Hero, Purpose, Subsidiaries, Investor Relations, Contact,
+Footer. The contact form stores submissions in Supabase and sends an
+email notification via Resend.
 
 ## Status
 
@@ -18,9 +21,16 @@ submissions in Supabase and sends an email notification via Resend.
 - Contact form verified end to end: submission stored in Supabase **and**
   notification email delivered (`last_event: delivered` via Resend).
 - **Deployed to Netlify** at <https://endearing-conkies-cc79c4.netlify.app>
-  (env vars set in the Netlify site settings). Currently behind Netlify access
-  control — returns `401` to anonymous requests — and the `ashvernholdings.com`
-  DNS cutover is in progress. See [`DEPLOYMENT-NOTES.md`](./DEPLOYMENT-NOTES.md).
+  and at the custom domain <https://ashvernholdings.com> (env vars set in the
+  Netlify site settings). Netlify access control has been lifted — both URLs
+  are publicly reachable (`200`, confirmed 2026-09-04) — and the DNS cutover
+  is complete. See [`DEPLOYMENT-NOTES.md`](./DEPLOYMENT-NOTES.md) (note: that
+  file's own status line still says access-gated/DNS-in-progress as of
+  2026-09-02 — it predates this and hasn't been updated to match).
+- **"Bold Signature" visual redesign merged to `master` 2026-09-04** (PR #2)
+  and confirmed live in production — see `BUILD_PLAN.md` and
+  `docs/superpowers/specs/2026-09-04-ashvern-landing-redesign-bold.md`. The
+  prior "Atrium" redesign attempt (PR #1) was closed unmerged the same day.
 - Local dev still uses `.env.local`, which is git-ignored and already populated
   on this machine.
 
@@ -79,13 +89,17 @@ while the site is behind Netlify access control — lift that, or exempt
 | --- | --- |
 | `app/page.tsx` | The page — all six sections (server component) |
 | `app/contact-form.tsx` | Contact form (client component) |
+| `app/seal-arc.tsx` | The recurring amber "seal arc" brand-shape component |
+| `app/nav-scroll.tsx` | Client component: toggles the nav's solid background past the hero |
 | `app/api/contact/route.ts` | Validation + Supabase insert + Resend email |
 | `app/api/keep-alive/route.ts` | HEAD count on `contact_submissions` — free-tier keep-alive |
 | `.github/workflows/keep-alive.yml` | Scheduled `curl` of the keep-alive route (Mon & Thu) |
-| `app/globals.css` | "Ledger" design system: tokens, type, motion |
+| `app/globals.css` | "Bold Signature" design system: tokens, type, motion, licensed-image citations |
 | `app/layout.tsx` | Fonts (next/font) and metadata |
 | `supabase/schema.sql` | `contact_submissions` table + RLS |
-| `docs/superpowers/specs/2026-08-29-ashvern-landing-design.md` | Design record |
+| `BUILD_PLAN.md` | Build/verification log for the current ("Bold Signature") redesign |
+| `docs/superpowers/specs/2026-09-04-ashvern-landing-redesign-bold.md` | Current visual-identity design record |
+| `docs/superpowers/specs/2026-08-29-ashvern-landing-design.md` | Original site design record (content/structure, still accurate) |
 
 ## Before going public
 
