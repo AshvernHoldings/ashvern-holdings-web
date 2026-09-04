@@ -6,10 +6,11 @@ Plan: `docs/superpowers/plans/2026-09-04-ashvern-bold-signature.md`
 
 ## What was built
 
-- Full-bleed hero photograph (`public/img/skyline-hero.jpg`, San Francisco
-  skyline at sunset, Pexels-licensed — see `app/globals.css` for the
-  citation) filling the viewport, with bold Archivo display type overlaid
-  directly on the image.
+- Full-bleed hero photograph (`public/img/skyline-hero.jpg`, downtown
+  Atlanta skyline at sunset, Pexels-licensed — see `app/globals.css` for
+  the citation) filling the viewport, with bold Archivo display type
+  overlaid directly on the image. (Swapped from an initial San Francisco
+  photo in a follow-up pass — see "Hero image swap" below.)
 - A recurring "seal arc" brand shape (`app/seal-arc.tsx`) — a flat amber
   quarter-circle bleeding off a corner of the hero and every section below
   it, plus the footer.
@@ -74,6 +75,37 @@ Plan: `docs/superpowers/plans/2026-09-04-ashvern-bold-signature.md`
    `@media (prefers-reduced-motion: no-preference)` blocks, matching the
    same gating already used by `master`'s pre-existing `.reveal` rule.
 6. **`npm run build`** — clean, no errors or warnings.
+
+## Hero image swap (follow-up pass, same day)
+
+The original hero (San Francisco skyline, KEHN HERMANO/Pexels) didn't
+match the page's own "Holding Company · Georgia" eyebrow copy. Replaced
+with a new photo sourced the same careful way:
+
+- File: `public/img/skyline-hero.jpg` (same filename, same import site —
+  content replaced in place).
+- Source: Pexels, photo ID 11599618 —
+  <https://www.pexels.com/photo/city-of-atlanta-at-sunset-11599618/>
+- Photographer: Connor Scott McManus
+  (<https://www.pexels.com/@connorscottmcmanus/>)
+- License: Pexels License ("Free to use"), confirmed on the photo page
+  2026-09-04.
+- Original resolution: 6004×4008.
+- Downtown Atlanta skyline at sunset, dramatic magenta/pink sky filling
+  roughly the top two-thirds of the frame — same compositional shape
+  (dark buildings/rooftops at the bottom, under the headline's gradient
+  scrim) as the photo it replaces, so no CSS changes were needed.
+- Citations updated in `app/globals.css` (includes a note on the
+  supersession) and in the design spec's Imagery section.
+- Re-verified after the swap: `npm run build` clean; `git diff master --
+  app/page.tsx` re-run and still shows only indentation changes around
+  the constrained legal text (Article VII, Ridgepoint, IR, footer); the
+  new image renders full-bleed with legible overlaid text at 1600px — if
+  anything the amber seal arc reads with more contrast against this sky
+  than it did against the original. Mobile viewport still not directly
+  screenshotted (same `resize_window` limitation as before); no CSS
+  changed in this pass, so the responsive behavior verified earlier by
+  code inspection still applies unchanged.
 
 ## Open items for review
 

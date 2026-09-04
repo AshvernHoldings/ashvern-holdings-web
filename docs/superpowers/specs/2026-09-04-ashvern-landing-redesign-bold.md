@@ -81,22 +81,35 @@ over the dark sections below.
 
 ## Imagery
 
-**New hero photo** — sourced this session:
+**New hero photo** — sourced this session, then swapped for a second
+photo in a follow-up pass the same day:
 
-- File: `public/img/skyline-hero.jpg` — San Francisco skyline at sunset
-  from a hillside overlook, Transamerica Pyramid as the focal point, warm
-  pastel sky filling roughly the top two-thirds of the frame.
-- Source: Pexels, photo ID 3584437 —
-  <https://www.pexels.com/photo/city-skyline-during-golden-hour-3584437/>
-- Photographer: KEHN HERMANO (<https://pexels.com/@brotherkehn/>)
+- File: `public/img/skyline-hero.jpg` — downtown Atlanta skyline at
+  sunset, dramatic pink/magenta sky filling roughly the top two-thirds of
+  the frame, dark building silhouettes and rooftops anchoring the bottom.
+- Source: Pexels, photo ID 11599618 —
+  <https://www.pexels.com/photo/city-of-atlanta-at-sunset-11599618/>
+- Photographer: Connor Scott McManus
+  (<https://www.pexels.com/@connorscottmcmanus/>)
 - License: Pexels License ("Free to use" — free for commercial and
   personal use, no attribution required, modification permitted),
   confirmed on the photo page at time of sourcing.
-- Original resolution: 6000×4000.
-- Why this one over other golden-hour skyline candidates: the sky
-  dominates roughly two-thirds of the frame, which is exactly the negative
-  space the headline needs, and the palette (dusk pink/gold) sits
-  comfortably alongside the amber accent instead of competing with it.
+- Original resolution: 6004×4008.
+- Why this one: the same full-bleed hero requirements as the first
+  pass — a sky dramatic and large enough to carry the headline's negative
+  space — but sourced specifically for an Atlanta skyline this time, to
+  match the page's own "Holding Company · Georgia" eyebrow copy. The
+  vivid magenta/pink sky is, if anything, more dramatic than the original
+  San Francisco photo it replaces, and the same dark-foreground
+  composition (buildings/rooftops at the bottom, where the headline's
+  gradient scrim sits) carries over directly.
+
+**Superseded:** the first pass sourced a San Francisco skyline (Pexels
+3584437, KEHN HERMANO) for this same slot. It was visually strong on its
+own terms but didn't match the page's Georgia-holding-company framing —
+swapped for the Atlanta photo above before merge. See git history for the
+original citation (it briefly lived in this same section and in
+`app/globals.css`).
 
 **Existing photos:**
 

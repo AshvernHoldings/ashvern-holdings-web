@@ -29,7 +29,7 @@ export default function Home() {
       <section className="hero" aria-labelledby="hero-title">
         <Image
           src={skylineHero}
-          alt="San Francisco skyline at sunset, seen from a hillside overlook, the Transamerica Pyramid at center"
+          alt="Downtown Atlanta skyline at sunset under a dramatic pink and magenta sky"
           fill
           sizes="100vw"
           priority
