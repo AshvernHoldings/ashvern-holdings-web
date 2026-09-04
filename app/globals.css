@@ -356,6 +356,134 @@ footer .name {
   margin-bottom: 0.6rem;
 }
 
+/* ---- nav: minimal, transparent over the hero -------------------- */
+
+.site-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  background: transparent;
+  transition: background 150ms var(--ease-out), backdrop-filter 150ms var(--ease-out);
+}
+
+.site-nav--scrolled {
+  background: rgba(20, 18, 14, 0.85);
+  backdrop-filter: blur(8px);
+}
+
+.site-nav .wordmark {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--heading);
+  text-decoration: none;
+  background-image: none;
+}
+
+.site-nav .links {
+  display: none;
+  gap: 1.75rem;
+}
+
+.site-nav .links a {
+  color: var(--heading);
+  font-size: 0.9rem;
+  text-decoration: none;
+  background-image: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 150ms var(--ease-out);
+}
+
+.site-nav .links a:hover,
+.site-nav .links a:focus-visible {
+  border-color: var(--accent);
+}
+
+@media (min-width: 52rem) {
+  .site-nav .links {
+    display: flex;
+  }
+  .site-nav .links--mobile-only {
+    display: none;
+  }
+}
+
+.site-nav .links--mobile-only {
+  display: flex;
+}
+
+/* ---- seal arc: the recurring brand-shape signature -------------- *
+ * A flat-filled circle, corner-positioned so only one quadrant shows
+ * inside its (overflow: hidden) parent — reads as a quarter-circle
+ * bleeding off that corner, like a wax seal or ink stamp.            */
+
+.seal-arc {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.seal-arc--large {
+  width: 40vw;
+  height: 40vw;
+  max-width: 640px;
+  max-height: 640px;
+}
+
+.seal-arc--small {
+  width: 100px;
+  height: 100px;
+}
+
+.seal-arc--top-right {
+  top: 0;
+  right: 0;
+  transform: translate(35%, -35%);
+}
+
+.seal-arc--top-left {
+  top: 0;
+  left: 0;
+  transform: translate(-35%, -35%);
+}
+
+.seal-arc--bottom-right {
+  bottom: 0;
+  right: 0;
+  transform: translate(35%, 35%);
+}
+
+.seal-arc--bottom-left {
+  bottom: 0;
+  left: 0;
+  transform: translate(-35%, 35%);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .seal-arc--large {
+    animation: seal-in 400ms var(--ease-out) 150ms both;
+  }
+}
+
+@keyframes seal-in {
+  from {
+    opacity: 0;
+    transform: translate(35%, -35%) scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: translate(35%, -35%) scale(1);
+  }
+}
+
 /* ---- motion: scroll reveal (CSS-only, progressive) ------------- */
 
 @supports (animation-timeline: view()) {
