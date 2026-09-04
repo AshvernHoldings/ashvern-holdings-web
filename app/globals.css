@@ -476,17 +476,17 @@ footer .name {
   border-color: var(--accent);
 }
 
+.site-nav .links--mobile-only {
+  display: flex;
+}
+
 @media (min-width: 52rem) {
   .site-nav .links {
     display: flex;
   }
-  .site-nav .links--mobile-only {
+  .site-nav .links.links--mobile-only {
     display: none;
   }
-}
-
-.site-nav .links--mobile-only {
-  display: flex;
 }
 
 /* ---- seal arc: the recurring brand-shape signature -------------- *
