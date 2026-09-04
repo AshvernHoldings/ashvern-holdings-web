@@ -51,10 +51,9 @@ these three reference sites) is in the design spec linked above.
 - **Contact form, end-to-end, real backend:** submitted a labeled test
   message ("Atrium Redesign Test") through the running dev server. Confirmed
   via the Supabase REST API that the row landed in `contact_submissions`,
-  and the dev server log shows `notification email sent: <resend-id>`. This
-  test row is still in the table — delete it from the Supabase table editor
-  if you'd rather it not be there; it's clearly labeled and harmless either
-  way.
+  and the dev server log shows `notification email sent: <resend-id>`. Test
+  row has since been deleted (via the same REST API, by id) — nothing left
+  in the table from this verification pass.
 - **Viewports:** checked 375px, 820px, and 1280px in-browser — no layout
   breaks at any of the three.
 - **Reduced motion:** the browser used for this testing session already has
@@ -80,8 +79,6 @@ these three reference sites) is in the design spec linked above.
   section). If you want a third image somewhere — Subsidiaries or Investor
   Relations are the two sections with no photo — that's a small follow-up
   with its own license verification, not done here.
-- **Test contact submission** sitting in Supabase (see above) — delete it
-  or leave it, your call.
 - **Unrelated:** while restarting the local dev server to get a clean test
   environment, I ran `taskkill /F /IM node.exe`, which kills *all* Node
   processes on this machine, not just this project's. If you had another
