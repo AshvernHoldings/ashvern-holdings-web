@@ -1,35 +1,39 @@
 @import "tailwindcss";
 
 /* ------------------------------------------------------------------ *
- * Ashvern Holdings — dark / corporate
- * Deep navy ground, light text, one warm gold accent. Inter throughout.
+ * Ashvern Holdings — "Atrium"
+ * Warm paper ground, ink text, one restrained bottle-green accent.
+ * Fraunces (display) + Public Sans (body/UI). See
+ * docs/superpowers/specs/2026-09-04-ashvern-landing-redesign-editorial.md
  * ------------------------------------------------------------------ */
 
 :root {
-  --navy: #0e1a2e;         /* page background */
-  --navy-card: #16233b;    /* raised surfaces: subsidiary card, form fields */
-  --text: #e6ebf2;         /* body copy      — 14.5:1 on --navy */
-  --heading: #f4f7fb;      /* headings       — 16.2:1 on --navy */
-  --muted: #93a1b5;        /* eyebrow, cite, footer, secondary — 6.6:1 on --navy */
-  --line: rgba(255, 255, 255, 0.1);
-  --line-strong: rgba(255, 255, 255, 0.16);
-  --accent: #cba96a;       /* links, rule, focus, button — 7.8:1 on --navy */
-  --error: #e8837a;        /* 6.6:1 on --navy */
+  --paper: #f7f5f0;        /* page background */
+  --card: #ffffff;         /* raised surfaces: subsidiary entry, form fields */
+  --ink: #1b1a17;          /* headings, body copy   — 15.97:1 on --paper */
+  --heading: #1b1a17;
+  --muted: #635f54;        /* eyebrow, cite, footer, secondary — 5.85:1 on --paper */
+  --line: #e3dfd3;
+  --line-strong: #d6d0c1;
+  --accent: #2f4638;       /* links, rule, focus, button — 9.39:1 on --paper */
+  --error: #a6432e;        /* 5.56:1 on --paper */
 
-  --measure: 40rem;
-  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --measure: 38rem;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 
-  --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: var(--font-fraunces), Georgia, serif;
+  --font-sans: var(--font-public-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 @theme inline {
-  --color-navy: var(--navy);
-  --color-text: var(--text);
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
   --color-muted: var(--muted);
   --color-line: var(--line);
   --color-accent: var(--accent);
+  --font-serif: var(--font-serif);
   --font-sans: var(--font-sans);
 }
 
@@ -43,8 +47,8 @@ html {
 
 body {
   margin: 0;
-  background: var(--navy);
-  color: var(--text);
+  background: var(--paper);
+  color: var(--ink);
   font-family: var(--font-sans);
   font-size: 1.0625rem;
   line-height: 1.65;
@@ -54,7 +58,7 @@ body {
 
 ::selection {
   background: var(--accent);
-  color: var(--navy);
+  color: var(--paper);
 }
 
 a {
@@ -85,18 +89,19 @@ textarea:focus-visible {
 /* ---- layout -------------------------------------------------------- */
 
 .shell {
-  max-width: calc(var(--measure) + 3.5rem);
+  max-width: calc(var(--measure) + 4.5rem);
   margin-inline: auto;
   padding-inline: 1.75rem;
 }
 
 .section {
-  padding-block: clamp(3.5rem, 9vw, 6rem);
+  padding-block: clamp(4rem, 10vw, 7.5rem);
   border-top: 1px solid var(--line);
 }
 
 .section:first-of-type {
   border-top: 0;
+  padding-top: clamp(4.5rem, 12vw, 8.5rem);
 }
 
 .measure {
@@ -108,33 +113,36 @@ textarea:focus-visible {
 h1,
 h2,
 h3 {
-  font-family: var(--font-sans);
-  font-weight: 600;
+  font-family: var(--font-serif);
+  font-weight: 460;
   color: var(--heading);
-  letter-spacing: -0.011em;
+  letter-spacing: -0.006em;
   margin: 0;
   text-wrap: balance;
 }
 
 h1 {
-  font-size: clamp(2.3rem, 5.6vw, 3.3rem);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+  font-size: clamp(2.5rem, 6.2vw, 3.75rem);
+  line-height: 1.08;
+  font-weight: 400;
 }
 
 h2 {
-  font-size: clamp(1.55rem, 3.4vw, 1.95rem);
-  line-height: 1.22;
+  font-size: clamp(1.7rem, 3.8vw, 2.25rem);
+  line-height: 1.2;
 }
 
 h3 {
-  font-size: 1.18rem;
+  font-size: 1.22rem;
   line-height: 1.35;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: -0.006em;
 }
 
 p {
   margin: 0 0 1.1em;
-  color: var(--text);
+  color: var(--ink);
 }
 
 p:last-child {
@@ -148,7 +156,7 @@ p:last-child {
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--muted);
-  margin: 0 0 1.4rem;
+  margin: 0 0 1.5rem;
 }
 
 .lede {
@@ -158,12 +166,20 @@ p:last-child {
   color: var(--heading);
 }
 
+.accent-word {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--accent);
+}
+
 blockquote {
   margin: 1.75rem 0;
   padding-left: 1.4rem;
   border-left: 2px solid var(--accent);
-  font-size: 1.18rem;
-  line-height: 1.55;
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.5;
   color: var(--heading);
 }
 
@@ -174,25 +190,26 @@ blockquote p {
 .cite {
   display: block;
   margin-top: 0.7rem;
+  font-family: var(--font-sans);
   font-size: 0.8rem;
   letter-spacing: 0.04em;
   color: var(--muted);
 }
 
-/* ---- plates: licensed stock imagery, sunk into the navy ground ------ *
+/* ---- plates: licensed stock imagery, full-bleed-in-shell ---------- *
  * Two images only (hero + Purpose). Photos are Pexels-licensed (free for
  * commercial use, no attribution required, modification permitted;
  * verified "Free to use" on each photo page):
  *   hero    -- pexels.com/photo/urban-skyline-at-dusk-...-34232700 (Shlok Rana)
  *   purpose -- pexels.com/photo/gray-concrete-building-10889988     (Lana)
- * Each is darkened + desaturated in sharp, then given a navy scrim here
- * so it reads against #0e1a2e rather than glowing off it.               */
+ * Shown at natural color against the paper ground — no dark scrim, since
+ * the ground is light rather than navy.                               */
 
 figure.plate {
   position: relative;
-  margin: 2.6rem 0 0;
+  margin: 3rem 0 0;
   border: 1px solid var(--line-strong);
-  background: var(--navy-card);
+  background: var(--card);
   overflow: hidden;
   line-height: 0;
 }
@@ -201,31 +218,18 @@ figure.plate img {
   display: block;
   width: 100%;
   height: auto;
-  filter: saturate(0.86) contrast(1.02) brightness(0.98);
-}
-
-figure.plate::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(14, 26, 46, 0.16), rgba(14, 26, 46, 0.36));
-  pointer-events: none;
 }
 
 figure.plate--quiet img {
-  filter: saturate(0.75) contrast(1) brightness(0.82);
-}
-
-figure.plate--quiet::after {
-  background: linear-gradient(180deg, rgba(14, 26, 46, 0.34), rgba(14, 26, 46, 0.52));
+  filter: saturate(0.94);
 }
 
 /* ---- subsidiary entry ------------------------------------------- */
 
 .entry {
   border: 1px solid var(--line);
-  background: var(--navy-card);
-  padding: 1.6rem 1.75rem;
+  background: var(--card);
+  padding: 1.7rem 1.85rem;
 }
 
 .entry-head {
@@ -256,6 +260,7 @@ figure.plate--quiet::after {
 
 .field span {
   display: block;
+  font-family: var(--font-sans);
   font-size: 0.82rem;
   font-weight: 600;
   letter-spacing: 0.02em;
@@ -273,8 +278,8 @@ input,
 textarea {
   width: 100%;
   font: inherit;
-  color: var(--text);
-  background: var(--navy-card);
+  color: var(--ink);
+  background: var(--card);
   border: 1px solid var(--line-strong);
   border-radius: 0;
   padding: 0.7rem 0.85rem;
@@ -287,7 +292,7 @@ textarea {
 
 input::placeholder,
 textarea::placeholder {
-  color: #6f7d92;
+  color: #a19c8d;
 }
 
 .honeypot {
@@ -303,7 +308,7 @@ button.submit {
   font-size: 0.9rem;
   font-weight: 600;
   letter-spacing: 0.03em;
-  color: var(--navy);
+  color: var(--paper);
   background: var(--accent);
   border: 1px solid var(--accent);
   padding: 0.75rem 1.6rem;
@@ -312,7 +317,7 @@ button.submit {
 }
 
 button.submit:active {
-  transform: scale(0.97);
+  transform: scale(0.98);
 }
 
 button.submit:disabled {
@@ -333,7 +338,8 @@ button.submit:disabled {
 
 footer {
   border-top: 1px solid var(--line);
-  padding-block: 2.5rem;
+  padding-block: 2.75rem;
+  font-family: var(--font-sans);
   font-size: 0.9rem;
   color: var(--muted);
 }
@@ -344,32 +350,9 @@ footer p {
 }
 
 footer .name {
-  font-family: var(--font-sans);
-  font-weight: 600;
-  font-size: 1.05rem;
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 1.15rem;
   color: var(--heading);
   margin-bottom: 0.6rem;
-}
-
-/* ---- motion: scroll reveal (CSS-only, progressive) ------------- */
-
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .reveal {
-      animation: reveal linear both;
-      animation-timeline: view();
-      animation-range: entry 0% entry 42%;
-    }
-  }
-}
-
-@keyframes reveal {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
