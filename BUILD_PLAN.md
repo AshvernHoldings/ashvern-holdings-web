@@ -87,4 +87,11 @@ Plan: `docs/superpowers/plans/2026-09-04-ashvern-bold-signature.md`
 
 ## Deploy preview
 
-_Not yet pushed — filled in after `git push -u origin redesign/bold-signature`._
+Pushed to `origin/redesign/bold-signature`, PR #2:
+<https://github.com/AshvernHoldings/ashvern-holdings-web/pull/2>
+
+Netlify deploy preview (confirmed live, `200`, correct content via
+`curl`):
+<https://deploy-preview-2--endearing-conkies-cc79c4.netlify.app>
+
+Not merged to `master`.
