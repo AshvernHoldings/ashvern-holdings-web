@@ -96,6 +96,8 @@ textarea:focus-visible {
 }
 
 .section {
+  position: relative;
+  overflow: hidden;
   padding-block: clamp(3.5rem, 9vw, 6rem);
   border-top: 1px solid var(--line);
 }
@@ -184,45 +186,110 @@ blockquote p {
   color: var(--muted);
 }
 
-/* ---- plates: licensed stock imagery, sunk into the navy ground ------ *
- * Two images only (hero + Purpose). Photos are Pexels-licensed (free for
- * commercial use, no attribution required, modification permitted;
- * verified "Free to use" on each photo page):
- *   hero    -- pexels.com/photo/urban-skyline-at-dusk-...-34232700 (Shlok Rana)
- *   purpose -- pexels.com/photo/gray-concrete-building-10889988     (Lana)
- * Each is darkened + desaturated in sharp, then given a navy scrim here
- * so it reads against #0e1a2e rather than glowing off it.               */
+/* ---- licensed stock imagery -------------------------------------- *
+ * skyline-hero.jpg -- pexels.com/photo/city-skyline-during-golden-hour-3584437
+ *   (KEHN HERMANO). San Francisco skyline at sunset. Pexels License
+ *   ("Free to use" -- commercial use OK, no attribution required,
+ *   modification permitted), verified on the photo page 2026-09-04.
+ * tower-facade.webp -- previously verified, Lana/Pexels (see git history
+ *   of this file for the original citation). Reused here, full-bleed,
+ *   dark-scrimmed, as the About/Purpose section background.
+ * city-hero.webp -- previously verified, Shlok Rana/Pexels. Not used in
+ *   this layout (too flat/hazy at full-bleed scale); left in the repo.  */
 
-figure.plate {
+.hero {
   position: relative;
-  margin: 2.6rem 0 0;
-  border: 1px solid var(--line-strong);
-  background: var(--navy-card);
+  min-height: 100dvh;
   overflow: hidden;
-  line-height: 0;
+  display: flex;
+  align-items: flex-end;
 }
 
-figure.plate img {
-  display: block;
+.hero-image {
+  object-fit: cover;
+  z-index: -1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-image {
+    animation: hero-image-in 500ms var(--ease-out) both;
+  }
+  .hero-content > * {
+    animation: hero-text-in 400ms var(--ease-out) 120ms both;
+  }
+}
+
+@keyframes hero-image-in {
+  from {
+    opacity: 0;
+    transform: scale(1.03);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes hero-text-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 4rem 1.5rem 5rem;
+  background: linear-gradient(to top, var(--scrim), transparent 60%);
   width: 100%;
-  height: auto;
-  filter: saturate(0.86) contrast(1.02) brightness(0.98);
 }
 
-figure.plate::after {
+.hero-content h1 {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(2.5rem, 8vw, 5.5rem);
+  color: var(--heading);
+  margin: 0.3em 0 0;
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+}
+
+.hero-content .eyebrow {
+  color: var(--heading);
+  opacity: 0.85;
+}
+
+.hero-content .lede {
+  color: var(--heading);
+  margin-top: 1.2rem;
+}
+
+.section--photo {
+  position: relative;
+  overflow: hidden;
+}
+
+.section--photo .section-bg {
+  object-fit: cover;
+  z-index: -2;
+}
+
+.section--photo::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(14, 26, 46, 0.16), rgba(14, 26, 46, 0.36));
-  pointer-events: none;
+  background: rgba(17, 15, 11, 0.82);
+  z-index: -1;
 }
 
-figure.plate--quiet img {
-  filter: saturate(0.75) contrast(1) brightness(0.82);
-}
-
-figure.plate--quiet::after {
-  background: linear-gradient(180deg, rgba(14, 26, 46, 0.34), rgba(14, 26, 46, 0.52));
+.section--photo .section-content {
+  position: relative;
+  z-index: 1;
 }
 
 /* ---- subsidiary entry ------------------------------------------- */
@@ -337,6 +404,8 @@ button.submit:disabled {
 /* ---- footer --------------------------------------------------- */
 
 footer {
+  position: relative;
+  overflow: hidden;
   border-top: 1px solid var(--line);
   padding-block: 2.5rem;
   font-size: 0.9rem;
