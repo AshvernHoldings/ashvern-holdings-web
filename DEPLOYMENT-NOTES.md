@@ -23,20 +23,26 @@ abandoned — history kept below.
 - **Custom domain:** `ashvernholdings.com` DNS records are being added to point
   at Netlify.
 
-### Not yet public — access is gated
+### Access control has been lifted — site is public
 
-As of 2026-09-02 the site sits behind **Netlify access control**: every path,
-including `/api/*`, returns `401` and the `app.netlify.com/edge-access` login
-redirect to anyone without a Netlify session. This is fine for review but means:
+The `2026-09-02` access-gate described below is no longer in effect. Verified
+`2026-09-10`: both `https://ashvernholdings.com/` and
+`https://endearing-conkies-cc79c4.netlify.app/` return `200` on every path
+checked, including `/api/keep-alive` — no `app.netlify.com/edge-access`
+redirect. When exactly it was lifted (and by whom) isn't recorded; the site
+has been fully public for at least some window before this was noticed.
 
-- the site is not reachable by the public or by search engines yet;
-- **the keep-alive cron (`.github/workflows/keep-alive.yml`) cannot reach
-  `/api/keep-alive`** until this is lifted. Remove the site access
-  restriction (or allow `/api/keep-alive` specifically) before relying on the
-  workflow, then set the `KEEP_ALIVE_URL` repo variable and run it once.
-
-See `LAUNCH-BLOCKERS.md` for the Resend-domain work still outstanding before
-public launch.
+- `KEEP_ALIVE_URL` is set to `https://ashvernholdings.com/api/keep-alive` and
+  the `keep-alive` workflow has a verified successful manual run against it
+  (`2026-09-10`).
+- The site being reachable does **not** mean it's launch-ready — see
+  `LAUNCH-BLOCKERS.md`. Item 1 (Resend domain verification) is still
+  genuinely unresolved: no Resend DNS records exist for `ashvernholdings.com`
+  (checked `2026-09-10`), and `app/api/contact/route.ts` is still running on
+  the temporary sandbox workaround in production.
+- `contact_submissions` in Supabase has only the 2 pre-launch test rows from
+  `2026-09-02` (both from the site owner) — no third-party submissions have
+  come in during the time the site was unknowingly public.
 
 ---
 
@@ -93,11 +99,11 @@ Ridgepoint project.
    no lingering charge or team membership.
 2. **Finish the `ashvernholdings.com` DNS cutover** to Netlify and confirm the
    custom domain + TLS resolve.
-3. **Lift Netlify access control** so the site (and `/api/keep-alive`) is
-   publicly reachable, then set the `KEEP_ALIVE_URL` GitHub Actions repo
-   variable to `https://<public-host>/api/keep-alive` and trigger the
-   `keep-alive` workflow once to verify.
-4. **Clear the Resend-domain launch blocker** — see `LAUNCH-BLOCKERS.md`.
+3. ~~Lift Netlify access control~~ — already lifted (see above); `KEEP_ALIVE_URL`
+   is set and the workflow has a verified successful run.
+4. **Clear the Resend-domain launch blocker** — see `LAUNCH-BLOCKERS.md`. This
+   is the one real outstanding item: the site is publicly live right now
+   without it cleared.
 
 Netlify env vars (`SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `RESEND_API_KEY`,
 `CONTACT_NOTIFY_TO`, `CONTACT_NOTIFY_FROM`) are already set in the site's
