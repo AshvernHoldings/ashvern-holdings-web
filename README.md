@@ -1,9 +1,11 @@
 # Ashvern Holdings, Inc. — corporate site
 
-> ⚠️ **NOT READY FOR PUBLIC LAUNCH.** The contact-form notification email is a
-> temporary sandbox workaround pointed at the wrong mailbox. Read
-> [`LAUNCH-BLOCKERS.md`](./LAUNCH-BLOCKERS.md) and clear every item before this
-> goes live.
+> ⚠️ **Contact-form notification email — domain verified, delivery pending
+> confirmation.** `ashvernholdings.com` is verified in Resend and
+> `CONTACT_NOTIFY_FROM`/`CONTACT_NOTIFY_TO` point at real addresses in prod
+> (2026-09-11), but a live test submission's actual arrival at
+> `tbell@ashvernholdings.com` hasn't been confirmed yet. See
+> [`LAUNCH-BLOCKERS.md`](./LAUNCH-BLOCKERS.md).
 
 Single-page corporate presence for Ashvern Holdings, Inc. Next.js 16 (App
 Router), Tailwind v4. Current visual identity is "Bold Signature": a
@@ -33,6 +35,15 @@ email notification via Resend.
   prior "Atrium" redesign attempt (PR #1) was closed unmerged the same day.
 - Local dev still uses `.env.local`, which is git-ignored and already populated
   on this machine.
+- **Resend domain-verification launch blocker resolved (2026-09-11):**
+  `ashvernholdings.com` is verified at resend.com/domains (DKIM + both SPF
+  CNAMEs verified). `CONTACT_NOTIFY_FROM`/`CONTACT_NOTIFY_TO` are set to
+  `hello@ashvernholdings.com`/`tbell@ashvernholdings.com` in both
+  `.env.local` and Netlify's production environment, and
+  `app/api/contact/route.ts` no longer carries the sandbox-workaround
+  comment or the `onboarding@resend.dev` fallback. Deployed to production
+  (commit `dcef197`) and a real submission went through the live contact
+  form; actual email arrival is still pending confirmation.
 
 ## Run it
 
@@ -104,7 +115,8 @@ while the site is behind Netlify access control — lift that, or exempt
 ## Before going public
 
 See [`LAUNCH-BLOCKERS.md`](./LAUNCH-BLOCKERS.md) — every item there must be
-cleared. In short: verify a domain in Resend and move `CONTACT_NOTIFY_TO` back to
+cleared. Item 1 (Resend domain verification) is resolved as of 2026-09-11;
+the one remaining step is confirming the live test email actually arrived at
 `tbell@ashvernholdings.com`. Netlify env vars are already set; remaining
 deployment steps (DNS cutover, lifting access control) are in
 [`DEPLOYMENT-NOTES.md`](./DEPLOYMENT-NOTES.md).

@@ -121,12 +121,16 @@ with a new photo sourced the same careful way:
   actual phone check.
 - Resend delivery to `tbell@ashvernholdingsllc.com` for this redesign's
   test submission was never independently confirmed — only that
-  `/api/contact` returned `200` with no logged error. Spot-check that
-  inbox if you want certainty (subject will reference "Bold Signature
-  Verification"). Separately, `README.md` records an earlier, fully
-  confirmed Resend delivery (`last_event: delivered`) from testing done
-  before this redesign — the notification pipeline itself is known-good,
-  just not re-confirmed end-to-end this time.
+  `/api/contact` returned `200` with no logged error. Separately,
+  `README.md` records an earlier, fully confirmed Resend delivery
+  (`last_event: delivered`) from testing done before this redesign — the
+  notification pipeline itself is known-good, just not re-confirmed
+  end-to-end this time.
+  **Superseded 2026-09-11:** `ashvernholdingsllc.com`/sandbox mode is no
+  longer in play — `ashvernholdings.com` is now verified in Resend and
+  `CONTACT_NOTIFY_TO` points at `tbell@ashvernholdings.com` in production
+  (see `LAUNCH-BLOCKERS.md` item 1). A fresh live test submission went
+  through after that change; its email delivery is pending confirmation.
 - `city-hero.webp` (one of the two original licensed photos) is unused in
   this design — left in the repo, unreferenced.
 
