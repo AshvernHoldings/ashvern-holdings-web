@@ -54,22 +54,12 @@ export async function POST(req: Request) {
     return bad("Something went wrong on our end. Please try again.", 500);
   }
 
-  // Row is saved — the durable record. Email is best-effort notification.
-  //
-  // ⚠️ TEMPORARY WORKAROUND — MUST FIX BEFORE PUBLIC LAUNCH (see LAUNCH-BLOCKERS.md)
-  // Resend is in sandbox mode: with no verified domain it only delivers to the
-  // account-owner address, so CONTACT_NOTIFY_TO in .env.local is currently set to
-  // tbell@ashvernholdingsllc.com and CONTACT_NOTIFY_FROM to the shared
-  // onboarding@resend.dev sender. Real fix: verify ashvernholdings.com at
-  // resend.com/domains, set CONTACT_NOTIFY_FROM to an address on that domain, and
-  // set CONTACT_NOTIFY_TO back to tbell@ashvernholdings.com. Until then, form
-  // submissions notify the wrong mailbox / would silently fail to notify at all.
   const resendKey = process.env.RESEND_API_KEY;
   if (resendKey) {
     try {
       const resend = new Resend(resendKey);
       const { data: mailData, error: mailError } = await resend.emails.send({
-        from: process.env.CONTACT_NOTIFY_FROM || "onboarding@resend.dev",
+        from: process.env.CONTACT_NOTIFY_FROM || "hello@ashvernholdings.com",
         to: process.env.CONTACT_NOTIFY_TO || "tbell@ashvernholdings.com",
         replyTo: email,
         subject: `Contact form — ${name}`,
