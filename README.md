@@ -1,12 +1,5 @@
 # Ashvern Holdings, Inc. — corporate site
 
-> ⚠️ **Contact-form notification email — domain verified, delivery pending
-> confirmation.** `ashvernholdings.com` is verified in Resend and
-> `CONTACT_NOTIFY_FROM`/`CONTACT_NOTIFY_TO` point at real addresses in prod
-> (2026-09-11), but a live test submission's actual arrival at
-> `tbell@ashvernholdings.com` hasn't been confirmed yet. See
-> [`LAUNCH-BLOCKERS.md`](./LAUNCH-BLOCKERS.md).
-
 Single-page corporate presence for Ashvern Holdings, Inc. Next.js 16 (App
 Router), Tailwind v4. Current visual identity is "Bold Signature": a
 full-bleed photographic hero (Archivo display type overlaid on the image)
@@ -42,8 +35,9 @@ email notification via Resend.
   `.env.local` and Netlify's production environment, and
   `app/api/contact/route.ts` no longer carries the sandbox-workaround
   comment or the `onboarding@resend.dev` fallback. Deployed to production
-  (commit `dcef197`) and a real submission went through the live contact
-  form; actual email arrival is still pending confirmation.
+  (commit `dcef197`) and confirmed end to end: a real submission through
+  the live contact form arrived as a notification email at
+  `tbell@ashvernholdings.com`.
 
 ## Run it
 
@@ -115,8 +109,7 @@ while the site is behind Netlify access control — lift that, or exempt
 ## Before going public
 
 See [`LAUNCH-BLOCKERS.md`](./LAUNCH-BLOCKERS.md) — every item there must be
-cleared. Item 1 (Resend domain verification) is resolved as of 2026-09-11;
-the one remaining step is confirming the live test email actually arrived at
-`tbell@ashvernholdings.com`. Netlify env vars are already set; remaining
-deployment steps (DNS cutover, lifting access control) are in
+cleared. Item 1 (Resend domain verification) is resolved and confirmed as of
+2026-09-11. Netlify env vars are already set; remaining deployment steps
+(DNS cutover, lifting access control) are in
 [`DEPLOYMENT-NOTES.md`](./DEPLOYMENT-NOTES.md).

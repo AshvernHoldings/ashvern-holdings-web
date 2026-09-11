@@ -130,7 +130,8 @@ with a new photo sourced the same careful way:
   longer in play — `ashvernholdings.com` is now verified in Resend and
   `CONTACT_NOTIFY_TO` points at `tbell@ashvernholdings.com` in production
   (see `LAUNCH-BLOCKERS.md` item 1). A fresh live test submission went
-  through after that change; its email delivery is pending confirmation.
+  through after that change and its notification email was confirmed
+  delivered to `tbell@ashvernholdings.com`.
 - `city-hero.webp` (one of the two original licensed photos) is unused in
   this design — left in the repo, unreferenced.
 

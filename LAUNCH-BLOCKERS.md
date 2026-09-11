@@ -10,7 +10,9 @@ Netlify's production environment now have:
 - `CONTACT_NOTIFY_TO=tbell@ashvernholdings.com`
 
 `app/api/contact/route.ts` no longer carries the sandbox-workaround comment
-or the `onboarding@resend.dev` fallback.
+or the `onboarding@resend.dev` fallback. Confirmed via a real submission
+through the live contact form that the notification email arrived at
+`tbell@ashvernholdings.com`.
 
 ## 2. Sender domain / production environment
 
