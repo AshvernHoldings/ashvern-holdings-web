@@ -501,7 +501,7 @@ footer .name {
 }
 
 .site-nav .links a {
-  color: var(--text-body);
+  color: var(--text-primary);
   font-size: 0.9rem;
   text-decoration: none;
   background-image: none;
