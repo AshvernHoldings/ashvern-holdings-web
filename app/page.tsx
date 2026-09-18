@@ -4,7 +4,7 @@ import SealArc from "./seal-arc";
 import NavScroll from "./nav-scroll";
 import towerFacade from "../public/img/tower-facade.webp";
 import skylineHero from "../public/img/skyline-hero-dusk.jpg";
-import ahLogo from "../public/img/ah-logo-lockup.png";
+import ahMonogram from "../public/img/ah-monogram.png";
 
 const IR_EMAIL = "investing@ashvernholdings.com";
 
@@ -14,7 +14,7 @@ export default function Home() {
       <NavScroll />
       <nav className="site-nav" aria-label="Primary">
         <a className="wordmark" href="#hero-title">
-          Ashvern Holdings
+          <Image src={ahMonogram} alt="Ashvern Holdings, Inc." className="nav-logo" priority />
         </a>
         <div className="links">
           <a href="#purpose-title">About</a>
@@ -38,12 +38,6 @@ export default function Home() {
         />
         <SealArc size="large" corner="top-right" />
         <div className="hero-content">
-          <Image
-            src={ahLogo}
-            alt="Ashvern Holdings, Inc."
-            className="hero-logo"
-            priority
-          />
           <p className="eyebrow">Holding Company &middot; Georgia</p>
           <h1 id="hero-title">Ashvern Holdings, Inc.</h1>
           <p className="est">Est. 2026</p>
