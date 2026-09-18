@@ -1,23 +1,42 @@
 @import "tailwindcss";
 
 /* ------------------------------------------------------------------ *
- * Ashvern Holdings — "Bold Signature"
- * Full-bleed photography, near-black ground between photos, one
- * saturated amber accent used for the seal-arc brand shape, links,
- * and focus rings. Archivo for display headlines, Inter for body/UI.
+ * Ashvern Holdings — navy / silver
+ * Dark corporate navy ground, one metallic silver accent, white
+ * reserved for emphasis. Institutional and restrained — a holding
+ * company, not a consumer product. Archivo for display headlines,
+ * Inter for body/UI.
  * ------------------------------------------------------------------ */
 
 :root {
-  --ink: #14120e;           /* page background between photos */
-  --ink-card: #1c1a14;      /* raised surfaces: subsidiary card, form fields */
-  --text: #d9d6cd;          /* body copy      — on --ink */
-  --heading: #f7f5f0;       /* headings, hero type — warm white */
-  --muted: #9b9587;         /* eyebrow, cite, footer, secondary — on --ink */
-  --line: rgba(247, 245, 240, 0.12);
-  --line-strong: rgba(247, 245, 240, 0.2);
-  --accent: #d98a2b;        /* "Ashvern Amber" — seal arc, links, focus, button */
+  /* backgrounds — cool deep navy family */
+  --ink: #061726;             /* deepest: footer, vignette edges */
+  --navy-900: #0b2536;        /* page background */
+  --navy-800: #123049;        /* card / surface */
+  --navy-700: #1b3b54;        /* elevated surface, hover fill */
+
+  /* borders / dividers on navy */
+  --line-subtle: #24435c;     /* hairlines, card borders */
+  --line-strong: #34506a;     /* section breaks, input borders */
+
+  /* metallic silver — accent + brand shape */
+  --silver: #c9cfd2;
+  --silver-bright: #e6eaec;   /* highlights, hover state of silver elements */
+  --silver-deep: #8a97a0;     /* shadowed metal, de-emphasized silver */
+
+  /* text (on navy) */
+  --text-primary: #ffffff;    /* headlines, key figures */
+  --text-body: #c6ced4;       /* body copy */
+  --text-muted: #8a99a5;      /* eyebrows, captions, labels */
+  --text-on-silver: #0b2536;  /* text placed on a silver/accent fill */
+
+  /* interactive accent — restrained steel-blue, links & focus only */
+  --accent: #7fa6c9;
+  --accent-hover: #9fc0dd;
+  --focus-ring: #7fa6c9;
+
   --error: #e8837a;
-  --scrim: rgba(10, 9, 7, 0.6);
+  --scrim: color-mix(in srgb, var(--ink) 65%, transparent);
 
   --measure: 40rem;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
@@ -30,9 +49,9 @@
 
 @theme inline {
   --color-ink: var(--ink);
-  --color-text: var(--text);
-  --color-muted: var(--muted);
-  --color-line: var(--line);
+  --color-text: var(--text-body);
+  --color-muted: var(--text-muted);
+  --color-line: var(--line-subtle);
   --color-accent: var(--accent);
   --font-sans: var(--font-sans);
   --font-display: var(--font-display);
@@ -48,8 +67,8 @@ html {
 
 body {
   margin: 0;
-  background: var(--ink);
-  color: var(--text);
+  background: var(--navy-900);
+  color: var(--text-body);
   font-family: var(--font-sans);
   font-size: 1.0625rem;
   line-height: 1.65;
@@ -59,7 +78,7 @@ body {
 
 ::selection {
   background: var(--accent);
-  color: var(--ink);
+  color: var(--text-on-silver);
 }
 
 a {
@@ -82,7 +101,7 @@ a:focus-visible,
 button:focus-visible,
 input:focus-visible,
 textarea:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--focus-ring);
   outline-offset: 3px;
   border-radius: 1px;
 }
@@ -99,7 +118,7 @@ textarea:focus-visible {
   position: relative;
   overflow: hidden;
   padding-block: clamp(3.5rem, 9vw, 6rem);
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--line-strong);
 }
 
 .section:first-of-type {
@@ -117,7 +136,7 @@ h2,
 h3 {
   font-family: var(--font-sans);
   font-weight: 600;
-  color: var(--heading);
+  color: var(--text-primary);
   letter-spacing: -0.011em;
   margin: 0;
   text-wrap: balance;
@@ -141,7 +160,7 @@ h3 {
 
 p {
   margin: 0 0 1.1em;
-  color: var(--text);
+  color: var(--text-body);
 }
 
 p:last-child {
@@ -154,7 +173,7 @@ p:last-child {
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--text-muted);
   margin: 0 0 1.4rem;
 }
 
@@ -162,16 +181,16 @@ p:last-child {
   font-size: clamp(1.15rem, 2.3vw, 1.4rem);
   line-height: 1.55;
   font-weight: 400;
-  color: var(--heading);
+  color: var(--text-primary);
 }
 
 blockquote {
   margin: 1.75rem 0;
   padding-left: 1.4rem;
-  border-left: 2px solid var(--accent);
+  border-left: 2px solid var(--silver);
   font-size: 1.18rem;
   line-height: 1.55;
-  color: var(--heading);
+  color: var(--text-primary);
 }
 
 blockquote p {
@@ -183,7 +202,7 @@ blockquote p {
   margin-top: 0.7rem;
   font-size: 0.8rem;
   letter-spacing: 0.04em;
-  color: var(--muted);
+  color: var(--text-muted);
 }
 
 /* ---- licensed stock imagery -------------------------------------- *
@@ -257,19 +276,19 @@ blockquote p {
   font-family: var(--font-display);
   font-weight: 900;
   font-size: clamp(2.5rem, 8vw, 5.5rem);
-  color: var(--heading);
+  color: var(--text-primary);
   margin: 0.3em 0 0;
   line-height: 1.02;
   letter-spacing: -0.01em;
 }
 
 .hero-content .eyebrow {
-  color: var(--heading);
+  color: var(--text-primary);
   opacity: 0.85;
 }
 
 .hero-content .lede {
-  color: var(--heading);
+  color: var(--text-primary);
   margin-top: 1.2rem;
 }
 
@@ -287,7 +306,7 @@ blockquote p {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(17, 15, 11, 0.82);
+  background: color-mix(in srgb, var(--ink) 82%, transparent);
   z-index: -1;
 }
 
@@ -299,8 +318,8 @@ blockquote p {
 /* ---- subsidiary entry ------------------------------------------- */
 
 .entry {
-  border: 1px solid var(--line);
-  background: var(--ink-card);
+  border: 1px solid var(--line-subtle);
+  background: var(--navy-800);
   padding: 1.6rem 1.75rem;
 }
 
@@ -318,7 +337,7 @@ blockquote p {
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--text-muted);
   border: 1px solid var(--line-strong);
   padding: 0.2rem 0.5rem;
 }
@@ -335,22 +354,22 @@ blockquote p {
   font-size: 0.82rem;
   font-weight: 600;
   letter-spacing: 0.02em;
-  color: var(--heading);
+  color: var(--text-primary);
   margin-bottom: 0.4rem;
 }
 
 .field span em {
   font-style: normal;
   font-weight: 400;
-  color: var(--muted);
+  color: var(--text-muted);
 }
 
 input,
 textarea {
   width: 100%;
   font: inherit;
-  color: var(--text);
-  background: var(--ink-card);
+  color: var(--text-body);
+  background: var(--navy-800);
   border: 1px solid var(--line-strong);
   border-radius: 0;
   padding: 0.7rem 0.85rem;
@@ -363,7 +382,7 @@ textarea {
 
 input::placeholder,
 textarea::placeholder {
-  color: #766f60;
+  color: var(--text-muted);
 }
 
 .honeypot {
@@ -379,12 +398,20 @@ button.submit {
   font-size: 0.9rem;
   font-weight: 600;
   letter-spacing: 0.03em;
-  color: var(--ink);
-  background: var(--accent);
-  border: 1px solid var(--accent);
+  color: var(--silver);
+  background: transparent;
+  border: 1px solid var(--line-strong);
   padding: 0.75rem 1.6rem;
   cursor: pointer;
-  transition: transform 120ms var(--ease-out), opacity 120ms var(--ease-out);
+  transition: background-color 120ms var(--ease-out), color 120ms var(--ease-out),
+    transform 120ms var(--ease-out), opacity 120ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  button.submit:not(:disabled):hover {
+    background: var(--navy-700);
+    color: var(--silver-bright);
+  }
 }
 
 button.submit:active {
@@ -410,22 +437,23 @@ button.submit:disabled {
 footer {
   position: relative;
   overflow: hidden;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--line-strong);
+  background: var(--ink);
   padding-block: 2.5rem;
   font-size: 0.9rem;
-  color: var(--muted);
+  color: var(--text-muted);
 }
 
 footer p {
   margin: 0 0 0.3rem;
-  color: var(--muted);
+  color: var(--text-muted);
 }
 
 footer .name {
   font-family: var(--font-sans);
   font-weight: 600;
   font-size: 1.05rem;
-  color: var(--heading);
+  color: var(--text-primary);
   margin-bottom: 0.6rem;
 }
 
@@ -446,7 +474,7 @@ footer .name {
 }
 
 .site-nav--scrolled {
-  background: rgba(20, 18, 14, 0.85);
+  background: color-mix(in srgb, var(--navy-900) 85%, transparent);
   backdrop-filter: blur(8px);
 }
 
@@ -456,7 +484,7 @@ footer .name {
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--heading);
+  color: var(--text-primary);
   text-decoration: none;
   background-image: none;
 }
@@ -467,16 +495,17 @@ footer .name {
 }
 
 .site-nav .links a {
-  color: var(--heading);
+  color: var(--text-body);
   font-size: 0.9rem;
   text-decoration: none;
   background-image: none;
   border-bottom: 1px solid transparent;
-  transition: border-color 150ms var(--ease-out);
+  transition: color 150ms var(--ease-out), border-color 150ms var(--ease-out);
 }
 
 .site-nav .links a:hover,
 .site-nav .links a:focus-visible {
+  color: var(--accent);
   border-color: var(--accent);
 }
 

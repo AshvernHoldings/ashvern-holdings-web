@@ -14,7 +14,7 @@ export default function SealArc({
       aria-hidden="true"
       focusable="false"
     >
-      <circle cx="50" cy="50" r="50" fill="var(--accent)" />
+      <circle cx="50" cy="50" r="50" fill="var(--silver)" />
     </svg>
   );
 }
