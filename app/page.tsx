@@ -3,7 +3,8 @@ import ContactForm from "./contact-form";
 import SealArc from "./seal-arc";
 import NavScroll from "./nav-scroll";
 import towerFacade from "../public/img/tower-facade.webp";
-import skylineHero from "../public/img/skyline-hero.jpg";
+import skylineHero from "../public/img/skyline-hero-dusk.jpg";
+import ahLogo from "../public/img/ah-logo-lockup.png";
 
 const IR_EMAIL = "investing@ashvernholdings.com";
 
@@ -29,7 +30,7 @@ export default function Home() {
       <section className="hero" aria-labelledby="hero-title">
         <Image
           src={skylineHero}
-          alt="Downtown Atlanta skyline at sunset under a dramatic pink and magenta sky"
+          alt="Downtown Atlanta skyline at dusk under a deep blue evening sky"
           fill
           sizes="100vw"
           priority
@@ -37,8 +38,15 @@ export default function Home() {
         />
         <SealArc size="large" corner="top-right" />
         <div className="hero-content">
+          <Image
+            src={ahLogo}
+            alt="Ashvern Holdings, Inc."
+            className="hero-logo"
+            priority
+          />
           <p className="eyebrow">Holding Company &middot; Georgia</p>
           <h1 id="hero-title">Ashvern Holdings, Inc.</h1>
+          <p className="est">Est. 2026</p>
           <p className="lede measure">
             Ashvern Holdings, Inc. is a privately held Georgia corporation that
             owns and oversees equity interests in a group of operating
