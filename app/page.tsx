@@ -2,6 +2,7 @@ import Image from "next/image";
 import ContactForm from "./contact-form";
 import SealArc from "./seal-arc";
 import NavScroll from "./nav-scroll";
+import MobileNav from "./mobile-nav";
 import towerFacade from "../public/img/tower-facade.webp";
 import skylineHero from "../public/img/skyline-hero-dusk.jpg";
 import ahMonogram from "../public/img/ah-monogram.png";
@@ -22,9 +23,7 @@ export default function Home() {
           <a href="#ir-title">Investor Relations</a>
           <a href="#contact-title">Contact</a>
         </div>
-        <div className="links links--mobile-only">
-          <a href="#contact-title">Contact</a>
-        </div>
+        <MobileNav />
       </nav>
 
       <section className="hero" aria-labelledby="hero-title">
